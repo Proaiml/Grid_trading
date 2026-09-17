@@ -4,6 +4,7 @@ This bot activate principal grid trading functionality for specific assets.
 
 The program must not start at higher zone or dead_zone.
 
+bnbwallet:0x13d598485848388110ec4ec3055e7c9731f5efba
 
 ###*               $$This Program was written by İlhan Koçaslan$$               *###
 """
