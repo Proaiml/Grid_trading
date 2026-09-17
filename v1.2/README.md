@@ -40,6 +40,14 @@ v1.2, botu komut satırından çalıştırmanın ötesinde, tarayıcınızdan te
 4. **Tek Tıkla Güvenlik Doğrulaması:**
    - Paneldeki **"Self-Test"** butonuyla botun 20.480 durum kombinasyonunu anında doğrulayabilirsiniz.
 
+<p align="center">
+  <img src="../assets/dashboard_preview.png" alt="Binance Grid Bot v1.2 Pro Web Dashboard" width="95%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);" />
+</p>
+
+<p align="center">
+  <img src="../assets/dashboard_bat_generator.png" alt="Özel .BAT Başlatıcı ve Yapılandırma Üreticisi" width="85%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); margin-top: 10px;" />
+</p>
+
 ---
 
 ## 🚀 Hızlı Başlangıç

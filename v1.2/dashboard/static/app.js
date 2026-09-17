@@ -633,4 +633,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Başlangıç Yüklemesi
   loadConfig();
+
+  // URL Hash ile doğrudan modal açma desteği (#bat, #test)
+  if (window.location.hash === "#bat") {
+    setTimeout(() => {
+      document.getElementById("btnGenerateBat").click();
+    }, 1200);
+  } else if (window.location.hash === "#test") {
+    setTimeout(() => {
+      document.getElementById("btnSelfTest").click();
+    }, 1200);
+  }
 });
+

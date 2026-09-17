@@ -9,6 +9,10 @@
 
 Bu depo, hem **v1.0 Klasik Konsol Sürümünü** hem de kurumsal güvenlik önlemleri, tek ekranlı modern web yönetim paneli, kazanç simülatörü ve `.bat` başlatıcı üreticisi içeren **v1.2 Pro / Safety Edition** sürümünü içerir.
 
+<p align="center">
+  <img src="assets/dashboard_preview.png" alt="Binance Grid Bot v1.2 Pro Web Dashboard" width="98%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
+</p>
+
 ---
 
 ## ⚡ Sürüm Karşılaştırması
@@ -53,6 +57,10 @@ Tek ekrandan tüm ayarları yapmak, kazanç simülasyonunu izlemek ve özel `.ba
 - **Etkileşimli Simülasyon:** Yatay dalgalı, boğa, ayı veya şok volatilite piyasalarında al/sat noktalarını, kümülatif kâr eğrisini ve maksimum drawdown oranını grafik üzerinde canlı simüle edin.
 - **Özel `.BAT` Üretici:** Arayüzdeki parametrelere göre tek tıkla `start_custom_bot.bat` oluşturup diske kaydedin veya tarayıcıdan indirin.
 - **Dahili Self-Test:** 20.480 kombinasyonlu güvenlik testini tek tıkla ekrandan çalıştırın.
+
+<p align="center">
+  <img src="assets/dashboard_bat_generator.png" alt="Özel .BAT Başlatıcı ve Yapılandırma Üreticisi" width="85%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); margin-top: 10px;" />
+</p>
 
 ---
 
