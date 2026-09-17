@@ -33,12 +33,19 @@ dead_zone   ──── [0, Price_Low] ─────────────�
 ```
 
 ### Hesaplama Formülleri:
-1. **Toplam Sektör Sayısı:**
-   $$\text{Grid\_Area} = \text{Grid\_Number} + 1$$
-2. **Sektör Başına Düşen Bakiye:**
-   $$\text{Sector\_Balance} = \frac{\text{Balance}}{\text{Grid\_Area}}$$
-3. **Grid Fiyat Genişliği (Basamak Boyutu):**
-   $$\text{Grid\_balance} = \frac{\text{Price\_High} - \text{Price\_Low}}{\text{Grid\_Area}}$$
+
+Algoritma sermayeyi ve fiyat aralıklarını şu formüllerle dilimler:
+
+```python
+# 1. Toplam Sektör Sayısı:
+Grid_Area = Grid_Number + 1
+
+# 2. Sektör Başına Düşen Bakiye ($):
+Sector_Balance = Balance / Grid_Area
+
+# 3. Grid Fiyat Genişliği ($):
+Grid_balance = (Price_High - Price_Low) / Grid_Area
+```
 
 ### Sektör Durum Makinesi (State Machine):
 Her sektör 2 farklı durumdan birinde bulunur:
