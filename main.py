@@ -13,8 +13,8 @@ from binance.client import Client
 import json,os
 
 #Connection
-privatekey = "DoFjR5VVl7N2WDGtTF6GumhaTcTLKjPjKwQrksqjJ8nD8Ampt7V2ZRWPuxo6Q9E0"
-secretkey = "PShF0wz4v1SFKsHfiVL6AUQtLAAx8khkNMgFJreSjsnP3PVuQoLSeLe89DUIZFoP"
+privatekey = ""
+secretkey = ""
 client = Client(privatekey, secretkey)
 
 #Parameters
