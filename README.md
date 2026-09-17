@@ -123,7 +123,11 @@ python main.py
 
 ---
 
-## 👨‍💻 Yazar
+## 👨‍💻 Yazar & Destek
 
 - **İlhan Koçaslan** — [GitHub: @Proaiml](https://github.com/Proaiml)
-- **BNB Cüzdan:** `0x13d598485848388110ec4ec3055e7c9731f5efba`
+- **BNB Smart Chain (BEP20) Cüzdan:** `0x89943b0a0f43fc6cd3ce9a8c19718485dcaf0bb7`
+
+<p align="left">
+  <img src="assets/bnb_qr.png" alt="BNB Deposit QR Code" width="220" style="border-radius: 10px; margin-top: 8px;" />
+</p>
