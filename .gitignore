@@ -11,10 +11,13 @@ __pycache__/
 .idea/
 .vscode/
 
-# Logs
+# Logs & State
 *.log
+runtime_state.json
+*.tmp
 
 # OS
 Thumbs.db
 Desktop.ini
 .DS_Store
+

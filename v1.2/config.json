@@ -1,0 +1,36 @@
+{
+  "bot_name": "GridBot_v1_3_Full",
+  "mode": "paper",
+  "api_key": "PUT_API_KEY_HERE",
+  "api_secret": "PUT_API_SECRET_HERE",
+  "live_trading_confirmation": "",
+
+  "symbol": "MATICUSDT",
+  "price_low": "1.42",
+  "price_high": "1.70",
+  "grid_number": 4,
+  "total_quote_budget": "60",
+
+  "poll_interval_seconds": 0.5,
+  "request_retry_delay_seconds": 1.0,
+  "order_submit_attempts": 3,
+  "order_query_attempts": 8,
+  "order_query_delay_seconds": 1.0,
+  "max_orders_per_transition": 10,
+
+  "restart_recovery_policy": "sell_stale_only",
+  "state_file": "runtime_state.json",
+  "log_file": "gridbot.log",
+  "instance_lock_port": 47821,
+
+  "recv_window_ms": 10000,
+  "run_self_tests_on_start": true,
+  "console_log_level": "INFO",
+  "file_log_level": "INFO",
+
+  "_mode_help": "paper = emir göndermez; testnet = Binance Spot Testnet; live = gerçek Binance Spot",
+  "_live_safety": "live modunda live_trading_confirmation alanını I_UNDERSTAND_LIVE_ORDERS yapmadan bot başlamaz",
+  "_grid_note": "Orijinal mantık korunur: gerçek sektör sayısı grid_number + 1'dir. Örn. grid_number=4 => sector1..sector5.",
+  "_state_note": "Grid parametrelerini veya symbol değerini aktif state varken değiştirmeyin. Bot güvenlik için config fingerprint uyuşmazlığında durur.",
+  "_keys_note": "İsterseniz config yerine BINANCE_API_KEY ve BINANCE_API_SECRET ortam değişkenlerini kullanabilirsiniz."
+}
