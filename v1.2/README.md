@@ -5,7 +5,9 @@
 [![Web Dashboard](https://img.shields.io/badge/Web_Dashboard-FastAPI-009688.svg)](http://127.0.0.1:8000)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**Grid Trading Bot v1.2 Pro**, İlhan Koçaslan'ın orijinal sektör bazlı histerezis (`$ / A`) stratejisini temel alan; kurumsal düzeyde veri güvenliği, atomik durum kurtarma, tek ekranlı etkileşimli web yönetim paneli, kazanç simülatörü ve dışarıya `.bat` üretici modülleriyle donatılmış gelişmiş algoritmik ticaret sistemidir.
+**Grid Trading Bot v1.2 Pro**, İlhan Koçaslan'ın orijinal sektör bazlı histerezis (`$ / A`) stratejisini temel alan; güvenli durum kaydı, atomik durum kurtarma, tek ekranlı etkileşimli web yönetim paneli, kazanç simülatörü ve dışarıya `.bat` üretici modülleriyle donatılmış gelişmiş algoritmik ticaret sistemidir.
+
+> **Sürüm adı hakkında:** Klasörün adı `v1.2`'dir; içindeki bot motoru (`v1.2/main.py`) kendini "v1.3 Full / Safety Edition" olarak tanıtır ve `config.json`'daki bot adı `GridBot_v1_3_Full`'dur. Bu belgelerde "v1.2" bu klasördeki sürümün tamamını ifade eder.
 
 ---
 
@@ -16,12 +18,12 @@
 | **Arayüz & Kontrol** | Konsol / Terminal | **Tek Ekranlı Web Dashboard & Simülatör (FastAPI + JS)** |
 | **Simülasyon Modu** | Harici `simulation.py` | **Tek ekranda 4 farklı piyasa senaryosuyla anlık görsel simülasyon** |
 | **Başlatıcı Üretimi** | Sabit `.bat` dosyası | **Arayüzden tek tıkla özel `.bat` ve `config.json` dışa aktarma** |
-| **Durum Kaydı (Persistence)** | Basit JSON | **Atomik JSON yazımı (`runtime_state.json`), elektrik/ağ kopmasında sıfır veri kaybı** |
+| **Durum Kaydı (Persistence)** | Basit JSON | **Atomik JSON yazımı (`runtime_state.json`); emir gönderilmeden önce bekleyen emir diske yazılır, elektrik/ağ kopmasından sonra bot aynı emri Binance'ten sorgulayarak kaldığı yerden devam eder** |
 | **Emir Güvenliği (Idempotency)** | Rastgele / Standart | **Deterministik `clientOrderId` takibi; ağ kopmasında mükerrer emir engeli** |
 | **Hassasiyet & Yuvarlama** | Standart `float` | **Yüksek hassasiyetli `Decimal` + Binance LOT_SIZE & MIN_NOTIONAL filtre uyumu** |
 | **Çoklu Çalışma Koruması** | Yok | **`47821` portu üzerinden Single-Instance Socket Kilidi** |
 | **Canlı İşlem Koruması** | Doğrudan API çağrısı | **`I_UNDERSTAND_LIVE_ORDERS` güvenlik koduyla çift kilit mekanizması** |
-| **Dahili Güvenlik Testi** | Yok | **20.480 durum patikasıyla çalışan dahili `self-test`** |
+| **Dahili Güvenlik Testi** | Yok | **Dahili `self-test`: 5 başlangıç sektörü × 2¹² yukarı/aşağı fiyat yolu = 20.480 durum patikası** |
 
 ---
 
@@ -95,9 +97,9 @@ python main.py
 ```
 
 ### Çalışma Modları:
-- **`paper`:** Emir göndermez, sıfır riskle gerçek veya simüle piyasada sanal işlem yapar.
+- **`paper`:** Emir göndermez; gerçek piyasa fiyatlarıyla sanal işlem yapar.
 - **`testnet`:** Binance Spot Testnet ortamında sanal bakiye ile canlı API testi yapar.
-- **`live`:** Gerçek Binance Spot hesabınızda işlem yapar. **Güvenlik gereği, `live_trading_confirmation` alanına `"I_UNDERSTAND_LIVE_ORDERS"` yazılmadıkça bot canlı moda geçmez.**
+- **`live`:** Gerçek Binance Spot hesabınızda işlem yapar. **Güvenlik gereği, `live_trading_confirmation` alanına `"I_UNDERSTAND_LIVE_ORDERS"` yazılmadıkça bot başlamaz.**
 
 ---
 
@@ -106,9 +108,9 @@ python main.py
 ```
 v1.2/
 │
-├── main.py                # Orijinal çekirdek bot motoru (İlhan Koçaslan)
+├── main.py                # Bot motoru (strateji: İlhan Koçaslan)
 ├── config.json            # Bot yapılandırma dosyası
-├── start_bot.bat          # Orijinal konsol başlatıcısı
+├── start_bot.bat          # Konsol başlatıcısı
 ├── run_dashboard.bat      # Tek tıkla Web Dashboard başlatıcısı
 ├── requirements.txt       # Gerekli bağımlılıklar
 │
@@ -124,6 +126,6 @@ v1.2/
 
 ## 🔒 Güvenlik & Önemli Uyarılar
 
-1. **Çekirdek Kod Bütünlüğü:** Orijinal `main.py` ve `config.json` dosyaları bayt düzeyinde korunmuştur.
+1. **Kâr garantisi yoktur:** Bot, fiyat aralığın içinde dalgalandığı sürece çalışır; borsa ve ağ kaynaklı riskleri ortadan kaldıramaz.
 2. **API İzinleri:** Binance API anahtarlarınızda yalnızca **Spot Trading** izni verin; **Withdrawals (Para Çekme)** iznini kesinlikle kapalı tutun.
 3. **Kasa Yönetimi:** Toplam bütçenizi risk toleransınıza uygun belirleyin ve canlıya geçmeden önce mutlaka `paper` modunda test edin.

@@ -7,7 +7,9 @@
 
 **Grid Trading Bot**, kripto para piyasalarında belirlenen fiyat aralıklarında otomatik olarak parçalı alım-satım yaparak piyasa dalgalanmalarından (volatilite) kâr sağlayan algoritmik bir ticaret botudur.
 
-Bu depo, hem **v1.0 Klasik Konsol Sürümünü** hem de kurumsal güvenlik önlemleri, tek ekranlı modern web yönetim paneli, kazanç simülatörü ve `.bat` başlatıcı üreticisi içeren **v1.2 Pro / Safety Edition** sürümünü içerir.
+Bu depo, hem **v1.0 Klasik Konsol Sürümünü** hem de gelişmiş güvenlik önlemleri, tek ekranlı modern web yönetim paneli, kazanç simülatörü ve `.bat` başlatıcı üreticisi içeren **v1.2 Pro / Safety Edition** sürümünü içerir.
+
+> **Sürüm adı hakkında:** Klasörün adı `v1.2`'dir; içindeki bot motoru (`v1.2/main.py`) kendini "v1.3 Full / Safety Edition" olarak tanıtır ve `config.json`'daki bot adı `GridBot_v1_3_Full`'dur. Bu belgelerde "v1.2" bu klasördeki sürümün tamamını ifade eder.
 
 <p align="center">
   <img src="assets/dashboard_preview.png" alt="Binance Grid Bot v1.2 Pro Web Dashboard" width="98%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
@@ -22,12 +24,12 @@ Bu depo, hem **v1.0 Klasik Konsol Sürümünü** hem de kurumsal güvenlik önle
 | **Yönetim Arayüzü** | Konsol / Terminal | 🌐 **Tek Ekranlı Web Dashboard (FastAPI + JS)** |
 | **Simülasyon Modu** | Harici `simulation.py` | 📊 **Tek ekranda 4 piyasa senaryolu canlı simülatör** |
 | **Başlatıcı Üretimi** | Manuel düzenleme | 🚀 **Web ekranından tek tıkla özel `.bat` dışa aktarma** |
-| **Durum Saklama** | Standart JSON | 🛡️ **Atomik JSON (`runtime_state.json`), sıfır veri kaybı** |
+| **Durum Saklama** | Standart JSON | 🛡️ **Atomik JSON (`runtime_state.json`): yarım yazılmış dosya kalmaz, açık pozisyonlar yeniden başlatmada hatırlanır** |
 | **Çoklu Süreç Kilidi** | Yok | 🔒 **`47821` portu üzerinden Single-Instance Soket Kilidi** |
 | **Emir Güvenliği (Idempotency)** | Temel | ⚡ **Deterministik `clientOrderId` takibi ve kurtarma** |
 | **Sayısal Hassasiyet** | Standart `float` | 🎯 **Yüksek hassasiyetli `Decimal` + Binance Filtreleri** |
 | **Canlı İşlem Koruması** | Doğrudan API çağrısı | 🔑 **`I_UNDERSTAND_LIVE_ORDERS` güvenlik onay kilidi** |
-| **Dahili Güvenlik Testi** | Yok | 🧪 **20.480 durum patikasıyla çalışan dahili `self-test`** |
+| **Dahili Güvenlik Testi** | Yok | 🧪 **Dahili `self-test`: 5 başlangıç sektörü × 2¹² yukarı/aşağı fiyat yolu = 20.480 durum patikası** |
 
 ---
 
@@ -83,7 +85,7 @@ python main.py                # Botu başlat (config.json ayarlarına göre)
 
 ## 🏗️ Matematiksel Model ve Sektör Mimarisi
 
-Bot, sermayenizi ve fiyat aralığınızı matematiksel olarak eşit parçalara bölerek sektörlere ayırır:
+Bot, sermayenizi ve fiyat aralığınızı eşit parçalara bölerek sektörlere ayırır. Aşağıdaki örnek `grid_number = 4` içindir (5 sektör; `x` = bir grid adımı):
 
 ```
 higher_zone ──── [Price_High, ∞] ─────────────────> Tavan bölgesi (Tüm varlıklar satılır)
@@ -110,7 +112,7 @@ Grid_balance = (Price_High - Price_Low) / Grid_Area
 ### Sektör Durum Makinesi (State Machine):
 Her sektör 2 farklı durumdan birinde bulunur:
 - **`"$"` (Nakit Durumu):** Sektör nakittedir. Fiyat bir üst sektörden bu sektöre düştüğünde anında `Sector_Balance` tutarında **ALIM** yapar ve durumunu `"A"`ya çevirir.
-- **`"A"` (Varlık Durumu):** Sektörde kripto varlık tutulmaktadır. Fiyat bu sektörden bir üst sektöre yükseldiğinde pozisyon kârla **SATILIR** ve durum tekrar `"$"**a döner.
+- **`"A"` (Varlık Durumu):** Sektörde kripto varlık tutulmaktadır. Fiyat bu sektörden bir üst sektöre yükseldiğinde pozisyon kârla **SATILIR** ve durum tekrar `"$"` olur.
 
 ---
 
@@ -124,7 +126,7 @@ Grid_trading/
 ├── README.md                  # Genel proje dokümantasyonu
 │
 ├── v1.2/                      # Gelişmiş Güvenlikli Sürüm (v1.2 Pro)
-│   ├── main.py                # Orijinal v1.2 çekirdek kodu (İlhan Koçaslan)
+│   ├── main.py                # v1.2 bot motoru (strateji: İlhan Koçaslan)
 │   ├── config.json            # Yapılandırma şablonu
 │   ├── start_bot.bat          # v1.2 konsol başlatıcısı
 │   ├── run_dashboard.bat      # v1.2 Web Dashboard başlatıcısı
@@ -153,7 +155,7 @@ Grid_trading/
 
 - **API İzinleri:** Binance üzerinde API anahtarı oluştururken **"Enable Spot & Margin Trading"** seçeneğini açın; ancak **"Enable Withdrawals" (Para Çekme) iznini KESİNLİKLE KAPALI** tutun.
 - **Çift Güvenlik Onayı:** v1.2'de canlı işlem (`live` mod) yapabilmek için `config.json` veya web arayüzündeki `live_trading_confirmation` alanına `"I_UNDERSTAND_LIVE_ORDERS"` yazılması zorunludur.
-- **Risk Uyarısı:** Kripto para ticareti yüksek volatilite ve risk içerir. Canlıya almadan önce mutlaka `paper` modunda veya web dashboard üzerindeki simülatörde stratejinizi test ediniz.
+- **Risk Uyarısı:** Kripto para ticareti yüksek volatilite ve risk içerir. Bot kâr garantisi vermez; borsa ve ağ kaynaklı riskleri ortadan kaldıramaz. Fiyat aralığın dışına çıkarsa grid işlem yapmaz ya da elde varlık kalabilir. Canlıya almadan önce mutlaka `paper` modunda veya web dashboard üzerindeki simülatörde stratejinizi test edin.
 
 ---
 
